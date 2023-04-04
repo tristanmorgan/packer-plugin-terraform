@@ -10,8 +10,8 @@ variable "nomad_alt_url" {
   type        = string
 }
 
-resource "local_file" "consul_service" {
-  sensitive_content = templatefile("${path.module}/service.tpl",
+resource "local_sensitive_file" "consul_service" {
+  content = templatefile("${path.module}/service.tpl",
     {
       consul_server_node = var.consul_server_node
       nomad_alt_url      = var.nomad_alt_url
