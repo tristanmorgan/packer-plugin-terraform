@@ -1,9 +1,9 @@
 # Packer Plugin Terraform
 
-* [![Build Status](https://www.travis-ci.com/servian/packer-plugin-terraform.svg?branch=main)](https://travis-ci.com/servian/packer-plugin-terraform)
+* [![Build Status](https://www.travis-ci.com/tristanmorgan/packer-plugin-terraform.svg?branch=main)](https://travis-ci.com/tristanmorgan/packer-plugin-terraform)
 * [![license MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
-* [![GoReportCard](https://goreportcard.com/badge/github.com/servian/packer-plugin-terraform)](https://goreportcard.com/report/github.com/servian/packer-plugin-terraform)
-* [![Version](http://img.shields.io/github/release/servian/packer-plugin-terraform/all.svg?style=flat)](https://github.com/Servian/packer-plugin-terraform/releases)
+* [![GoReportCard](https://goreportcard.com/badge/github.com/tristanmorgan/packer-plugin-terraform)](https://goreportcard.com/report/github.com/tristanmorgan/packer-plugin-terraform)
+* [![Version](http://img.shields.io/github/release/tristanmorgan/packer-plugin-terraform/all.svg?style=flat)](https://github.com/Servian/packer-plugin-terraform/releases)
 
 Inspired by Megan Marsh's talk https://www.hashicorp.com/resources/extending-packer
 I bit the bullet and started making my own ill advised provisioner for Terraform.
@@ -14,7 +14,7 @@ I bit the bullet and started making my own ill advised provisioner for Terraform
       required_plugins {
         terraform = {
           version = "= 0.0.7"
-          source = "github.com/servian/terraform"
+          source = "github.com/tristanmorgan/terraform"
         }
       }
     }

@@ -2,7 +2,7 @@ packer {
   required_plugins {
     terraform = {
       version = ">= 0.0.8"
-      source  = "github.com/servian/terraform"
+      source  = "github.com/tristanmorgan/terraform"
     }
   }
 }

@@ -21,7 +21,7 @@ packer {
   required_plugins {
     name = {
       version = ">= 0.0.7"
-      source  = "github.com/servian/terraform"
+      source  = "github.com/tristanmorgan/terraform"
     }
   }
 }
@@ -29,7 +29,7 @@ packer {
 
 #### Manual installation
 
-You can find pre-built binary releases of the plugin [here](https://github.com/servian/packer-plugin-terraform/releases).
+You can find pre-built binary releases of the plugin [here](https://github.com/tristanmorgan/packer-plugin-terraform/releases).
 Once you have downloaded the latest archive corresponding to your target OS,
 uncompress it to retrieve the plugin binary file corresponding to your platform.
 To install the plugin, please follow the Packer documentation on
