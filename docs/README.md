@@ -20,7 +20,7 @@ Then, run [`packer init`](https://www.packer.io/docs/commands/init).
 packer {
   required_plugins {
     name = {
-      version = ">= 0.0.7"
+      version = ">= 0.0.1"
       source  = "github.com/tristanmorgan/terraform"
     }
   }
