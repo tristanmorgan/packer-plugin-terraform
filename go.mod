@@ -4,9 +4,9 @@ go 1.20
 
 require (
 	github.com/hashicorp/go-cleanhttp v0.5.2
-	github.com/hashicorp/hcl/v2 v2.14.1
-	github.com/hashicorp/packer-plugin-sdk v0.4.0
-	github.com/zclconf/go-cty v1.10.0
+	github.com/hashicorp/hcl/v2 v2.16.2
+	github.com/hashicorp/packer-plugin-sdk v0.5.0
+	github.com/zclconf/go-cty v1.12.1
 )
 
 require (
