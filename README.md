@@ -1,6 +1,5 @@
 # Packer Plugin Terraform
 
-* [![Build Status](https://www.travis-ci.com/tristanmorgan/packer-plugin-terraform.svg?branch=main)](https://travis-ci.com/tristanmorgan/packer-plugin-terraform)
 * [![license MPL-2.0](https://img.shields.io/badge/license-MPL--2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 * [![GoReportCard](https://goreportcard.com/badge/github.com/tristanmorgan/packer-plugin-terraform)](https://goreportcard.com/report/github.com/tristanmorgan/packer-plugin-terraform)
 * [![Version](http://img.shields.io/github/release/tristanmorgan/packer-plugin-terraform/all.svg?style=flat)](https://github.com/Servian/packer-plugin-terraform/releases)

@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/hashicorp/hcl/v2 v2.16.2
-	github.com/hashicorp/packer-plugin-sdk v0.5.0
+	github.com/hashicorp/packer-plugin-sdk v0.5.1
 	github.com/zclconf/go-cty v1.12.1
 )
 
@@ -58,3 +58,5 @@ require (
 	golang.org/x/time v0.3.0 // indirect
 	gopkg.in/square/go-jose.v2 v2.6.0 // indirect
 )
+
+replace github.com/zclconf/go-cty => github.com/nywilken/go-cty v1.12.1
