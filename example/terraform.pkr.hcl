@@ -1,8 +1,12 @@
 packer {
   required_plugins {
     terraform = {
-      version = ">= 0.0.1"
+      version = ">= 0.0.2"
       source  = "github.com/tristanmorgan/terraform"
+    }
+    docker = {
+      version = "~> 1"
+      source  = "github.com/hashicorp/docker"
     }
   }
 }
@@ -22,11 +26,11 @@ build {
   }
 
   provisioner "terraform" {
-    code_path       = "./tfcode"
-    prevent_sudo    = "true"
+    code_path    = "./tfcode"
+    prevent_sudo = "true"
     variable_string = jsonencode({
-        consul_server_node = false
-        nomad_alt_url = "https://example.com"
+      consul_server_node = false
+      nomad_alt_url      = "https://example.com"
     })
   }
 
