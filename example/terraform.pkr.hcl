@@ -13,7 +13,7 @@ packer {
 
 source "docker" "amazon" {
   commit = true
-  image  = "amazonlinux:2"
+  image  = "amazonlinux:2023"
 }
 
 build {

@@ -60,7 +60,7 @@ func FetchLatestTerraform() (string, error) {
 	// enough to block on if the release api is broken/slow.
 	client.Timeout = time.Duration(3000) * time.Millisecond
 
-	log.Println(fmt.Sprintf("About to fetch from URL: %s", u.String()))
+	log.Printf("About to fetch from URL: %s", u.String())
 	resp, err := client.Do(req)
 	if err != nil {
 		return "", err
@@ -68,7 +68,7 @@ func FetchLatestTerraform() (string, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
-		return "", fmt.Errorf("Unknown status: %d", resp.StatusCode)
+		return "", fmt.Errorf("unknown status: %d", resp.StatusCode)
 	}
 
 	var r io.Reader = resp.Body
@@ -77,6 +77,6 @@ func FetchLatestTerraform() (string, error) {
 	if err := json.NewDecoder(r).Decode(&result); err != nil {
 		return "", err
 	}
-	log.Println(fmt.Sprintf("Got version response: %s", result.Version))
+	log.Printf("Got version response: %s", result.Version)
 	return result.Version, nil
 }

@@ -69,7 +69,6 @@ type Config struct {
 type Provisioner struct {
 	config            Config
 	guestOSTypeConfig guestOSTypeConfig
-	guestCommands     *guestexec.GuestCommands
 }
 
 // RunTemplate for temp storage of interpolation vars
@@ -106,7 +105,7 @@ func (p *Provisioner) Prepare(raws ...interface{}) error {
 	p.guestOSTypeConfig = guestOSTypeConfigs[p.config.GuestOSType]
 
 	if p.config.StagingDir == "" {
-		log.Println(fmt.Sprintf("Setting default StagingDir: %s", p.guestOSTypeConfig.stagingDir))
+		log.Printf("Setting default StagingDir: %s\n", p.guestOSTypeConfig.stagingDir)
 		p.config.StagingDir = p.guestOSTypeConfig.stagingDir
 	}
 
@@ -120,23 +119,23 @@ func (p *Provisioner) Prepare(raws ...interface{}) error {
 		if err != nil {
 			return fmt.Errorf("unable to fetch Terraform Version %s", err)
 		}
-		log.Println(fmt.Sprintf("Setting default Terraform Version: %s", tfVer))
+		log.Printf("Setting default Terraform Version: %s\n", tfVer)
 		p.config.Version = tfVer
 	}
 
 	if p.config.InstallCommand == "" {
-		log.Println(fmt.Sprintf("Setting default InstallCommand: %s", p.guestOSTypeConfig.installCommand))
+		log.Printf("Setting default InstallCommand: %s\n", p.guestOSTypeConfig.installCommand)
 		p.config.InstallCommand = p.guestOSTypeConfig.installCommand
 	}
 
 	if p.config.RunCommand == "" {
-		log.Println(fmt.Sprintf("Setting default RunCommand: %s", p.guestOSTypeConfig.runCommand))
+		log.Printf("Setting default RunCommand: %s\n", p.guestOSTypeConfig.runCommand)
 		p.config.RunCommand = p.guestOSTypeConfig.runCommand
 	}
 
 	if p.config.VariableString != "" {
 		if err := json.Unmarshal([]byte(p.config.VariableString), &p.config.Variables); err != nil {
-			return fmt.Errorf("Error processing Variables: %s", err)
+			return fmt.Errorf("error processing Variables: %s", err)
 		}
 	}
 
@@ -148,17 +147,17 @@ func (p *Provisioner) Provision(ctx context.Context, ui packer.Ui, comm packer.C
 	ui.Say("Provisioning with Terraform...")
 
 	if err := p.createDir(ui, comm, p.config.StagingDir); err != nil {
-		return fmt.Errorf("Error creating staging directory: %s", err)
+		return fmt.Errorf("error creating staging directory: %s", err)
 	}
 
 	ui.Message("Uploading Code")
 	if err := p.uploadDirectory(ui, comm, p.config.StagingDir, p.config.CodePath); err != nil {
-		return fmt.Errorf("Error uploading code: %s", err)
+		return fmt.Errorf("error uploading code: %s", err)
 	}
 
 	ui.Message("Genarating TFvars")
 	if err := p.createTfvars(ui, comm); err != nil {
-		return fmt.Errorf("Error generating tfvars: %s", err)
+		return fmt.Errorf("error generating tfvars: %s", err)
 	}
 
 	ui.Message("Installing Terraform")
@@ -168,24 +167,24 @@ func (p *Provisioner) Provision(ctx context.Context, ui packer.Ui, comm packer.C
 		Sudo:       !p.config.PreventSudo,
 	}
 
-	log.Println(fmt.Sprintf("templating command: %s with %#v", p.config.InstallCommand, &p.config.ctx))
+	log.Printf("templating command: %s with %#v\n", p.config.InstallCommand, &p.config.ctx)
 	command, err := interpolate.Render(p.config.InstallCommand, &p.config.ctx)
 	if err != nil {
-		return fmt.Errorf("Error rendering Template: %s", err)
+		return fmt.Errorf("error rendering Template: %s", err)
 	}
-	log.Println(fmt.Sprintf("Executing command: %s", command))
+	log.Printf("Executing command: %s\n", command)
 	if err := p.runCommand(ui, comm, command); err != nil {
-		return fmt.Errorf("Error running Terraform: %s", err)
+		return fmt.Errorf("error running Terraform: %s", err)
 	}
 
 	ui.Message("Running Terraform")
 	command, err = interpolate.Render(p.config.RunCommand, &p.config.ctx)
 	if err != nil {
-		return fmt.Errorf("Error rendering Template: %s", err)
+		return fmt.Errorf("error rendering Template: %s", err)
 	}
-	log.Println(fmt.Sprintf("Executing command: %s", command))
+	log.Printf("Executing command: %s\n", command)
 	if err := p.runCommand(ui, comm, command); err != nil {
-		return fmt.Errorf("Error installing Terraform: %s", err)
+		return fmt.Errorf("error installing Terraform: %s", err)
 	}
 
 	return nil
@@ -222,7 +221,7 @@ func (p *Provisioner) createDir(ui packer.Ui, comm packer.Communicator, dir stri
 	}
 
 	if cmd.ExitStatus() != 0 {
-		return fmt.Errorf("Non-zero exit status. See output above for more information.")
+		return fmt.Errorf("non-zero exit status: see output above for more information")
 	}
 	return nil
 }
@@ -249,7 +248,7 @@ func (p *Provisioner) createTfvars(ui packer.Ui, comm packer.Communicator) error
 	if err != nil {
 		return err
 	}
-	log.Println(fmt.Sprintf("Templated Variables: %s", tfvarsData))
+	log.Printf("Templated Variables: %s\n", tfvarsData)
 
 	// Upload the bytes
 	remotePath := filepath.ToSlash(filepath.Join(p.config.StagingDir, "terraform.auto.tfvars"))
