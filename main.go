@@ -21,7 +21,7 @@ var (
 	versDisp = flag.Bool("version", false, "Display version")
 
 	// PluginVersion used by packer
-	PluginVersion = version.InitializePluginVersion(Version, VersionPrerelease)
+	PluginVersion = version.NewPluginVersion(Version, VersionPrerelease, "")
 )
 
 func main() {
