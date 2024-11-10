@@ -21,13 +21,13 @@ type CheckResponse struct {
 	Name                       string   `json:"name"`
 	TimestampCreated           string   `json:"timestamp_created"`
 	TimestampUpdated           string   `json:"timestamp_updated"`
-	UrlChangelog               string   `json:"url_changelog"`
-	UrlDockerRegistryDockerhub string   `json:"url_docker_registry_dockerhub"`
-	UrlDockerRegistryEcr       string   `json:"url_docker_registry_ecr"`
-	UrlLicense                 string   `json:"url_license"`
-	UrlProjectWebsite          string   `json:"url_project_website"`
-	UrlShasums                 string   `json:"url_shasums"`
-	UrlSourceRepository        string   `json:"url_source_repository"`
+	URLChangelog               string   `json:"url_changelog"`
+	URLDockerRegistryDockerhub string   `json:"url_docker_registry_dockerhub"`
+	URLDockerRegistryEcr       string   `json:"url_docker_registry_ecr"`
+	URLLicense                 string   `json:"url_license"`
+	URLProjectWebsite          string   `json:"url_project_website"`
+	URLShasums                 string   `json:"url_shasums"`
+	URLSourceRepository        string   `json:"url_source_repository"`
 	Version                    string   `json:"version"`
 }
 
@@ -35,7 +35,7 @@ type CheckResponse struct {
 type Build struct {
 	Arch string
 	OS   string
-	Url  string
+	URL  string
 }
 
 // FetchLatestTerraform grabs the latest verions of Terraform from Hashicorp

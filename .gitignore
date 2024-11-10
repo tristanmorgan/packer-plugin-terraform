@@ -1,5 +1,4 @@
 packer-provisioner-terraform*
-go.sum
 dist/*
 example/tfcode/.terraform.lock.hcl
 example/tfcode/.terraform/*
