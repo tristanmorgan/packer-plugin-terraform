@@ -5,7 +5,7 @@ go 1.23
 require (
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/hashicorp/hcl/v2 v2.20.1
-	github.com/hashicorp/packer-plugin-sdk v0.5.3
+	github.com/hashicorp/packer-plugin-sdk v0.5.4
 	github.com/zclconf/go-cty v1.14.4
 )
 
@@ -22,7 +22,7 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/consul/api v1.28.2 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
-	github.com/hashicorp/go-getter/v2 v2.2.1 // indirect
+	github.com/hashicorp/go-getter/v2 v2.2.2 // indirect
 	github.com/hashicorp/go-hclog v1.6.3 // indirect
 	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
@@ -36,7 +36,7 @@ require (
 	github.com/hashicorp/golang-lru v1.0.2 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/hashicorp/serf v0.10.1 // indirect
-	github.com/hashicorp/vault/api v1.13.0 // indirect
+	github.com/hashicorp/vault/api v1.14.0 // indirect
 	github.com/hashicorp/yamux v0.1.1 // indirect
 	github.com/jehiah/go-strftime v0.0.0-20171201141054-1d33003b3869 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
