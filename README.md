@@ -12,7 +12,7 @@ I bit the bullet and started making my own ill advised provisioner for Terraform
     packer {
       required_plugins {
         terraform = {
-          version = ">= 0.0.2"
+          version = ">= 0.0.4"
           source = "github.com/tristanmorgan/terraform"
         }
       }
