@@ -4,6 +4,9 @@
 # This action is compatible with Packer v1.7.0 or later.
 name: test plugin example
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
     inputs:
