@@ -146,7 +146,7 @@ func (p *Provisioner) Prepare(raws ...interface{}) error {
 func (p *Provisioner) Provision(ctx context.Context, ui packer.Ui, comm packer.Communicator, generatedData map[string]interface{}) error {
 	ui.Say("Provisioning with Terraform...")
 
-	if err := p.createDir(ui, comm, p.config.StagingDir); err != nil {
+	if err := p.createDir(ctx, ui, comm, p.config.StagingDir); err != nil {
 		return fmt.Errorf("error creating staging directory: %s", err)
 	}
 
@@ -173,7 +173,7 @@ func (p *Provisioner) Provision(ctx context.Context, ui packer.Ui, comm packer.C
 		return fmt.Errorf("error rendering Template: %s", err)
 	}
 	log.Printf("Executing command: %s\n", command)
-	if err := p.runCommand(ui, comm, command); err != nil {
+	if err := p.runCommand(ctx, ui, comm, command); err != nil {
 		return fmt.Errorf("error running Terraform: %s", err)
 	}
 
@@ -183,14 +183,14 @@ func (p *Provisioner) Provision(ctx context.Context, ui packer.Ui, comm packer.C
 		return fmt.Errorf("error rendering Template: %s", err)
 	}
 	log.Printf("Executing command: %s\n", command)
-	if err := p.runCommand(ui, comm, command); err != nil {
+	if err := p.runCommand(ctx, ui, comm, command); err != nil {
 		return fmt.Errorf("error installing Terraform: %s", err)
 	}
 
 	return nil
 }
 
-func (p *Provisioner) runCommand(ui packer.Ui, comm packer.Communicator, command string) error {
+func (p *Provisioner) runCommand(ctx context.Context, ui packer.Ui, comm packer.Communicator, command string) error {
 	var out, outErr bytes.Buffer
 	cmd := &packer.RemoteCmd{
 		Command: command,
@@ -199,7 +199,6 @@ func (p *Provisioner) runCommand(ui packer.Ui, comm packer.Communicator, command
 		Stderr:  &outErr,
 	}
 
-	ctx := context.TODO()
 	if err := cmd.RunWithUi(ctx, comm, ui); err != nil {
 		return err
 	}
@@ -209,8 +208,7 @@ func (p *Provisioner) runCommand(ui packer.Ui, comm packer.Communicator, command
 	return nil
 }
 
-func (p *Provisioner) createDir(ui packer.Ui, comm packer.Communicator, dir string) error {
-	ctx := context.TODO()
+func (p *Provisioner) createDir(ctx context.Context, ui packer.Ui, comm packer.Communicator, dir string) error {
 	cmd := &packer.RemoteCmd{
 		Command: fmt.Sprintf("mkdir -p '%s'", dir),
 	}
@@ -230,7 +228,7 @@ func (p *Provisioner) uploadDirectory(ui packer.Ui, comm packer.Communicator, ds
 	// Make sure there is a trailing "/" so that the directory isn't
 	// created on the other side.
 	if src[len(src)-1] != '/' {
-		src = src + "/"
+		src += "/"
 	}
 
 	return comm.UploadDir(dst, src, nil)
