@@ -59,8 +59,8 @@ type Config struct {
 
 	VariableString string `mapstructure:"variable_string"`
 
-	Variables   map[string]interface{} `mapstructure:"variables" mapstructure-to-hcl2:",skip"`
-	GuestOSType string                 `mapstructure:"guest_os_type"`
+	Variables   map[string]any `mapstructure:"variables" mapstructure-to-hcl2:",skip"`
+	GuestOSType string         `mapstructure:"guest_os_type"`
 
 	ctx interpolate.Context
 }
@@ -82,7 +82,7 @@ type RunTemplate struct {
 func (p *Provisioner) ConfigSpec() hcldec.ObjectSpec { return p.config.FlatMapstructure().HCL2Spec() }
 
 // Prepare parses the config and get everything ready
-func (p *Provisioner) Prepare(raws ...interface{}) error {
+func (p *Provisioner) Prepare(raws ...any) error {
 	err := config.Decode(&p.config, &config.DecodeOpts{
 		PluginType:         "terraform",
 		Interpolate:        true,
@@ -143,7 +143,7 @@ func (p *Provisioner) Prepare(raws ...interface{}) error {
 }
 
 // Provision does the work of installing Terraform and running it on the remote
-func (p *Provisioner) Provision(ctx context.Context, ui packer.Ui, comm packer.Communicator, generatedData map[string]interface{}) error {
+func (p *Provisioner) Provision(ctx context.Context, ui packer.Ui, comm packer.Communicator, generatedData map[string]any) error {
 	ui.Say("Provisioning with Terraform...")
 
 	if err := p.createDir(ctx, ui, comm, p.config.StagingDir); err != nil {

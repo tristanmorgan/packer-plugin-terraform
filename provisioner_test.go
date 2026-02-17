@@ -6,7 +6,7 @@ import (
 )
 
 func TestProvisioner_Impl(t *testing.T) {
-	var raw interface{} = &Provisioner{}
+	var raw any = &Provisioner{}
 	if _, ok := raw.(packer.Provisioner); !ok {
 		t.Fatalf("must be a Provisioner")
 	}
